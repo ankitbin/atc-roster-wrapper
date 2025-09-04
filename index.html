@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATC Roster</title>
+  <style>
+    :root { --crop: 56px; }            /* height of the GAS banner (adjust if needed) */
+    html, body { height: 100%; margin: 0; }
+    .wrapper { position: relative; height: 100vh; overflow: hidden; background: #f5f7fa; }
+    .appframe {
+      position: absolute; left: 0; top: calc(-1 * var(--crop));
+      width: 100%; height: calc(100% + var(--crop));
+      border: 0;
+    }
+    @media (max-width: 600px) {
+      :root { --crop: 64px; }          /* banner can be taller on mobile */
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Replace YOUR_WEB_APP_URL below with your Apps Script Web App URL -->
+    <iframe class="appframe" src="https://script.google.com/macros/s/AKfycbwauRXu7MM_j-KDUtdq9131Uzzf7y60beJQJkIkgypVmfpcX8-5Ze3E5uQ1ZJA0z9yy/exec"></iframe>
+  </div>
+</body>
+</html>
