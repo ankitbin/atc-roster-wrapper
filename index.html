@@ -4,29 +4,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ATC Roster</title>
   <style>
-    :root { --crop: 56px; }  /* height of the GAS banner (adjust if needed) */
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    .wrapper {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-      background: #f5f7fa;
+    :root { --crop: 16px; }            /* height of the GAS banner (adjust if needed) */
+    html, body { height: 100%; margin: 0; }
+    .wrapper { 
+      position: relative; 
+      height: 100vh; 
+      overflow: hidden; 
+      background: #f5f7fa; 
     }
     .appframe {
-      position: absolute;
-      left: 0;
+      position: absolute; 
+      left: 0; 
       top: calc(-1 * var(--crop));
-      width: 100%;
+      width: 100%; 
       height: calc(100% + var(--crop));
       border: 0;
-      overflow-x: auto;   /* ✅ allow horizontal scroll */
+    }
+
+    /* ✅ Fix for mobile hidden columns */
+    @media (max-width: 768px) {
+      .appframe {
+        transform: scale(0.8);   /* zoom out slightly */
+        transform-origin: top left;
+        width: 125%;             /* expand so no columns cut */
+        height: 111%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .appframe {
+        transform: scale(0.8);   /* more zoom out for small phones */
+        width: 125%;
+        height: 125%;
+      }
     }
 
     @media (max-width: 600px) {
-      :root { --crop: 64px; }  /* banner can be taller on mobile */
+      :root { --crop: 64px; }          /* banner can be taller on mobile */
     }
   </style>
 </head>
