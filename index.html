@@ -1,58 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ATC Roster</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      background: #f5f7fa;
+    :root { --crop: 16px; }            /* height of the GAS banner (adjust if needed) */
+    html, body { height: 100%; margin: 0; }
+    .wrapper { position: relative; height: 100vh; overflow: hidden; background: #f5f7fa; }
+    .appframe {
+      position: absolute; left: 0; top: calc(-1 * var(--crop));
+      width: 100%; height: calc(100% + var(--crop));
+      border: 0;
     }
-    iframe {
-      border: none;
-      height: 100vh;   /* full height */
-      width: 100vw;    /* full width */
-      display: block;
+    @media (max-width: 600px) {
+      :root { --crop: 64px; }          /* banner can be taller on mobile */
     }
   </style>
-  <script>
-    // Adjust iframe size on orientation change or resize
-    function resizeIframe() {
-      const iframe = document.querySelector("iframe");
-      iframe.style.height = window.innerHeight + "px";
-      iframe.style.width = window.innerWidth + "px";
-    }
-
-    // Auto-hide Google Apps Script banner inside iframe
-    function hideBanner() {
-      const iframe = document.querySelector("iframe");
-      try {
-        const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        const banner = innerDoc.querySelector(".apps-script-notification");
-        const cross = innerDoc.querySelector(".apps-script-notification-dismiss");
-        if (banner) banner.style.display = "none";
-        if (cross) cross.click();
-      } catch (e) {
-        // Cross-origin protection → fallback with delay
-        console.log("Banner auto-hide attempt:", e.message);
-      }
-    }
-
-    window.addEventListener("resize", resizeIframe);
-    window.addEventListener("orientationchange", resizeIframe);
-    window.addEventListener("load", () => {
-      resizeIframe();
-      setTimeout(hideBanner, 1500); // wait 1.5s for banner to appear
-    });
-  </script>
 </head>
 <body>
-  <!-- Replace YOUR_WEB_APP_URL with your Apps Script Web App URL -->
-  <iframe src="YOUR_WEB_APP_URL"></iframe>
+  <div class="wrapper">
+    <!-- Replace YOUR_WEB_APP_URL below with your Apps Script Web App URL -->
+    <iframe class="appframe" src="https://script.google.com/macros/s/AKfycbwauRXu7MM_j-KDUtdq9131Uzzf7y60beJQJkIkgypVmfpcX8-5Ze3E5uQ1ZJA0z9yy/exec"></iframe>
+  </div>
 </body>
 </html>
+
