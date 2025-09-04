@@ -1,77 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ATC Roster</title>
   <style>
     html, body {
       margin: 0;
-      padding: 0;
       height: 100%;
-      width: 100%;
       overflow: hidden;
-      background: #f5f7fa;
     }
-
-    .iframe-container {
+    .wrapper {
       width: 100%;
       height: 100%;
-      overflow: auto;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
     iframe {
       border: none;
       width: 100%;
       height: 100%;
       transform-origin: top left;
     }
-  </style>
-  <script>
-    function resizeIframe(iframe) {
-      try {
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        const table = doc.querySelector("table");
-        if (!table) return;
 
-        const tableWidth = table.scrollWidth;
-        const screenWidth = window.innerWidth;
-
-        const scale = screenWidth / tableWidth;
-        iframe.style.transform = "scale(" + scale + ")";
-        iframe.style.width = (100 / scale) + "%";
-        iframe.style.height = (100 / scale) + "%";
-      } catch (e) {
-        console.log("⚠️ Could not auto-detect table width, fallback scaling.");
-        // fallback if cross-origin blocks access
-        const defaultWidth = 1200;
-        const scale = window.innerWidth / defaultWidth;
-        iframe.style.transform = "scale(" + scale + ")";
-        iframe.style.width = (100 / scale) + "%";
-        iframe.style.height = (100 / scale) + "%";
+    /* 🔥 Scale iframe for smaller screens */
+    @media (max-width: 768px) {
+      iframe {
+        transform: scale(0.85);   /* zoom out */
+        width: 118%;              /* expand so no columns hide */
+        height: 118%;
       }
     }
 
-    window.addEventListener("resize", () => {
-      const iframe = document.querySelector("iframe");
-      if (iframe) resizeIframe(iframe);
-    });
-
-    window.addEventListener("orientationchange", () => {
-      const iframe = document.querySelector("iframe");
-      if (iframe) resizeIframe(iframe);
-    });
-
-    window.addEventListener("load", () => {
-      const iframe = document.querySelector("iframe");
-      iframe.onload = () => resizeIframe(iframe);
-    });
-  </script>
+    @media (max-width: 480px) {
+      iframe {
+        transform: scale(0.75);   /* further zoom out */
+        width: 133%;
+        height: 133%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="iframe-container">
-    <!-- Replace with your Apps Script Web App URL -->
-    <iframe src="https://script.google.com/macros/s/AKfycbwauRXu7MM_j-KDUtdq9131Uzzf7y60beJQJkIkgypVmfpcX8-5Ze3E5uQ1ZJA0z9yy/exec"></iframe>
+  <div class="wrapper">
+    <!-- Replace YOUR_WEB_APP_URL below with your actual Google Apps Script Web App URL -->
+    <iframe src="YOUR_WEB_APP_URL"></iframe>
   </div>
 </body>
 </html>
